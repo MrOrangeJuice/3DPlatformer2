@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://btv40gqugul7p"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_oks0w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7y6w"]
+albedo_color = Color(0, 0.803922, 0.647059, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fctu5"]
+material = SubResource("StandardMaterial3D_v7y6w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dkod"]
+albedo_color = Color(0.278431, 0.611765, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7hdw1"]
+material = SubResource("StandardMaterial3D_3dkod")
+size = Vector3(0.2, 0.2, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_18ppj"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_oks0w")
+
+[node name="Skin" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_fctu5")
+
+[node name="Beak" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.57208, -0.563678)
+mesh = SubResource("BoxMesh_7hdw1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_18ppj")
+
+[node name="SpringArm" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.946193, 0.323604, 0, -0.323604, 0.946193, 0, 1.5594, 0)
+spring_length = 6.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.93443)
+far = 200.0
