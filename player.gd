@@ -8,10 +8,12 @@ extends CharacterBody3D
 @export var jump_impulse = 20.0
 @export var mouse_sensitivity = .1
 @export var controller_sensitivity = 3
+@export var rot_speed = 25
 
 var snap_vector = Vector3.ZERO
 
 @onready var spring_arm = $SpringArm
+@onready var pivot = $Pivot
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -53,10 +55,11 @@ func get_direction(input_vector):
 	var direction = (input_vector.x * transform.basis.x) + (input_vector.z * transform.basis.z)
 	return direction
 	
-func apply_movement(_input_vector, direction, delta):
+func apply_movement(input_vector, direction, delta):
 	if direction != Vector3.ZERO:
 		velocity.x = velocity.move_toward(direction * max_speed, acceleration * delta).x
 		velocity.z = velocity.move_toward(direction * max_speed, acceleration * delta).z
+		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-input_vector.x, -input_vector.z), rot_speed * delta)
 
 func apply_friction(direction, delta):
 	if direction == Vector3.ZERO:
