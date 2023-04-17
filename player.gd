@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var max_speed = 10
+@export var max_speed = 12
 @export var gravity = -40
 @export var acceleration = 70
 @export var friction = 60
@@ -14,6 +14,8 @@ var snap_vector = Vector3.ZERO
 
 @onready var spring_arm = $SpringArm
 @onready var pivot = $Pivot
+@onready var armature = $Pivot/Armature
+@onready var anim_tree = $AnimationTree
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -44,6 +46,8 @@ func _physics_process(delta):
 	apply_controller_rotation()
 	spring_arm.rotation.x = clamp(spring_arm.rotation.x, deg_to_rad(-75), deg_to_rad(75))
 	move_and_slide()
+	# Animation
+	anim_tree.set("parameters/BlendSpace1D/blend_position", velocity.length() / max_speed)
 	
 func get_input_vector():
 	var input_vector = Vector3.ZERO
