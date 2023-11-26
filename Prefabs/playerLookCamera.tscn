@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b833cnb81x1wj"]
+
+[ext_resource type="Script" path="res://Scripts/playerLook.gd" id="1_31wiw"]
+
+[node name="playerLook_springArm" type="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.946193, 0.323604, 0, -0.323604, 0.946193, 0, 1.5594, 0)
+spring_length = 6.0
+script = ExtResource("1_31wiw")
+
+[node name="playerLook_Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.93443)
+far = 200.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bjr35obqpvhxv"]
+[gd_scene load_steps=16 format=3 uid="uid://bjr35obqpvhxv"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_j711m"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_sidb1"]
 [ext_resource type="Texture2D" uid="uid://dp8ok7dge62v1" path="res://Assets/character_Material Base Color.png" id="2_wc5f7"]
+[ext_resource type="Script" path="res://Scripts/cameraLook.gd" id="3_er6kq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vu25n"]
 resource_name = "Material"
@@ -532,13 +533,14 @@ blend_point_1/pos = 1.0
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_atd44"]
-graph_offset = Vector2(-601.476, -170.79)
+graph_offset = Vector2(-266.734, -17.4858)
 nodes/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_3rmp0")
 nodes/BlendSpace1D/position = Vector2(-20, 140)
 node_connections = [&"output", 0, &"BlendSpace1D"]
 
 [node name="character" type="CharacterBody3D"]
-script = ExtResource("1_j711m")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.469253, -0.900613, 1.35511)
+script = ExtResource("1_sidb1")
 
 [node name="Pivot" type="Marker3D" parent="."]
 
@@ -558,7 +560,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, 4.00768e-08, 3.39251e-09, -4.00768e-08, 0.985771, 0.168094, 3.39244e-09, -0.168094, 0.985771, -8.88178e-16, 0.152219, -1.49012e-08)
 bones/1/enabled = true
 bones/1/position = Vector3(-8.88178e-16, 0.152219, -1.49012e-08)
-bones/1/rotation = Quaternion(-0.0843478, 1.66568e-14, -2.01101e-08, 0.996436)
+bones/1/rotation = Quaternion(-0.0843478, 1.66778e-14, -2.01101e-08, 0.996436)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "spine.002"
 bones/2/parent = 1
@@ -578,7 +580,7 @@ bones/4/name = "spine.004"
 bones/4/parent = 3
 bones/4/rest = Transform3D(1, 2.13163e-14, 2.38419e-07, 9.42182e-08, 0.918604, -0.39518, -2.19012e-07, 0.39518, 0.918604, 5.29396e-23, 0.192579, 2.79397e-09)
 bones/4/enabled = true
-bones/4/position = Vector3(-2.18359e-09, 0.178428, -0.00040424)
+bones/4/position = Vector3(2.39226e-09, 0.165382, -0.000776993)
 bones/4/rotation = Quaternion(0.201738, 1.16758e-07, 2.4049e-08, 0.97944)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "spine.005"
@@ -627,8 +629,8 @@ bones/11/name = "upper_arm.L"
 bones/11/parent = 10
 bones/11/rest = Transform3D(-0.243773, 0.249726, 0.93713, -0.413903, 0.847073, -0.333395, -0.877074, -0.469153, -0.103131, 0.00779154, 0.200791, -0.020385)
 bones/11/enabled = true
-bones/11/position = Vector3(0.0077932, 0.200804, -0.0428132)
-bones/11/rotation = Quaternion(-0.0836853, 0.743212, -0.296627, 0.59384)
+bones/11/position = Vector3(0.00779472, 0.200815, -0.0634911)
+bones/11/rotation = Quaternion(-0.109647, 0.744424, -0.319894, 0.575742)
 bones/11/scale = Vector3(1, 1, 1)
 bones/12/name = "forearm.L"
 bones/12/parent = 11
@@ -655,8 +657,8 @@ bones/15/name = "upper_arm.R"
 bones/15/parent = 14
 bones/15/rest = Transform3D(-0.243773, -0.249726, -0.93713, 0.413903, 0.847073, -0.333395, 0.877074, -0.469153, -0.103131, -0.00779154, 0.200791, -0.020385)
 bones/15/enabled = true
-bones/15/position = Vector3(-0.0077932, 0.200804, -0.0428132)
-bones/15/rotation = Quaternion(-0.0836853, -0.743212, 0.296627, 0.59384)
+bones/15/position = Vector3(-0.00779472, 0.200815, -0.0634911)
+bones/15/rotation = Quaternion(-0.109647, -0.744424, 0.319894, 0.575742)
 bones/15/scale = Vector3(1, 1, 1)
 bones/16/name = "forearm.R"
 bones/16/parent = 15
@@ -691,7 +693,7 @@ bones/20/parent = 0
 bones/20/rest = Transform3D(0.968799, 0.247868, -7.21775e-07, 0.247615, -0.967801, -0.045272, -0.0112222, 0.0438591, -0.998975, 0.178809, 0.0708185, 0.0259423)
 bones/20/enabled = true
 bones/20/position = Vector3(0.178809, 0.0708185, 0.0259423)
-bones/20/rotation = Quaternion(0.991913, 0.12488, -0.0028286, 0.0224644)
+bones/20/rotation = Quaternion(0.991914, 0.12488, -0.0028286, 0.0224644)
 bones/20/scale = Vector3(1.00001, 1, 1)
 bones/21/name = "shin.L"
 bones/21/parent = 20
@@ -719,7 +721,7 @@ bones/24/parent = 0
 bones/24/rest = Transform3D(0.968799, -0.247868, 1.29454e-06, -0.247615, -0.967801, -0.0452721, 0.0112228, 0.043859, -0.998975, -0.178809, 0.0708185, 0.0259422)
 bones/24/enabled = true
 bones/24/position = Vector3(-0.178809, 0.0708185, 0.0259422)
-bones/24/rotation = Quaternion(0.991913, -0.12488, 0.00282888, 0.0224644)
+bones/24/rotation = Quaternion(0.991914, -0.12488, 0.00282888, 0.0224644)
 bones/24/scale = Vector3(1.00001, 1, 1)
 bones/25/name = "shin.R"
 bones/25/parent = 24
@@ -765,6 +767,7 @@ parameters/BlendSpace1D/blend_position = -0.158215
 [node name="SpringArm" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.946193, 0.323604, 0, -0.323604, 0.946193, 0, 1.5594, 0)
 spring_length = 6.0
+script = ExtResource("3_er6kq")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.93443)
