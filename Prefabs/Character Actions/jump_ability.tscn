@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://1ltqbhjjpufe"]
+
+[ext_resource type="PackedScene" uid="uid://ca8yem83eu131" path="res://Prefabs/Character Actions/character_ability.tscn" id="1_x8oau"]
+[ext_resource type="Script" path="res://Scripts/jump_ability.gd" id="2_e48wp"]
+
+[node name="jump_ability" instance=ExtResource("1_x8oau")]
+script = ExtResource("2_e48wp")

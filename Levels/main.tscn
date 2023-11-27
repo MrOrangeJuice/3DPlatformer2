@@ -1,6 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://byto4ieobofmi"]
+[gd_scene load_steps=14 format=3 uid="uid://byto4ieobofmi"]
 
 [ext_resource type="PackedScene" uid="uid://bjr35obqpvhxv" path="res://Prefabs/character.tscn" id="1_tp0c6"]
+[ext_resource type="PackedScene" uid="uid://ca8yem83eu131" path="res://Prefabs/Character Actions/character_ability.tscn" id="2_60qvc"]
+[ext_resource type="Script" path="res://Scripts/character_ability.gd" id="3_vgl70"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wl5um"]
 rough = true
@@ -95,3 +97,6 @@ mesh = SubResource("BoxMesh_tdlkm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Moveable box"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_8qx2q")
+
+[node name="characterAbility" parent="." instance=ExtResource("2_60qvc")]
+script = ExtResource("3_vgl70")

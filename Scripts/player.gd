@@ -2,15 +2,12 @@ extends CharacterBody3D
 
 @export_group("Movement fields")
 @export var max_speed = 12
-@export var max_jumps = 2
-var jump_count = 0
 
 @export_group("Physics fields")
 @export var gravity = -40
 @export var acceleration = 70
 @export var friction = 60
 @export var air_friction = 10
-@export var jump_impulse = 20.0
 @export var rot_speed = 25
 var input_vector
 var direction
@@ -19,11 +16,13 @@ var snap_vector = Vector3.ZERO
 #State flags
 var jumpPressed = false
 var jumpReleased = false
+var moving = false
 
 #Node references
 @onready var pivot = $Pivot
 @onready var armature = $Pivot/Armature
 @onready var anim_tree = $AnimationTree
+@onready var jump_ability = $jump_ability
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -38,19 +37,22 @@ func _physics_process(delta):
 func _process_Inputs():
 	input_vector = get_input_vector()
 	direction = get_direction(input_vector)
-	jumpPressed = true if Input.is_action_just_pressed("jump") else false
-	jumpReleased = true if (Input.is_action_just_released("jump") and velocity.y > jump_impulse / 2) else false
+	if jump_ability != null:
+		jumpPressed = true if Input.is_action_just_pressed("jump") else false
+		jumpReleased = true if (Input.is_action_just_released("jump") and velocity.y > jump_ability.jump_impulse / 2) else false
 	
 func _update_State():
+	if direction != Vector3.ZERO: moving = true
 	pass
 	
 func _process_Movement(delta):
-	if direction != Vector3.ZERO: apply_movement(input_vector, direction, delta)
+	if moving: apply_movement(input_vector, direction, delta)
 	else: apply_friction(delta)
 	apply_gravity(delta)
-	if (jumpPressed or jumpReleased) and jump_count < max_jumps: jump()
+	if (jumpReleased): jump_ability._activate_ability()
+	elif (jumpPressed): jump_ability._activate_ability()
+	#if (jumpPressed or jumpReleased) and jump_count < max_jumps: jump()
 	move_and_slide()
-	if is_on_floor(): jump_count = 0
 	
 func get_input_vector():
 	var input_vector = Vector3.ZERO
@@ -76,11 +78,4 @@ func apply_friction(delta):
 		
 func apply_gravity(delta):
 	velocity.y += gravity * delta
-	velocity.y = clamp(velocity.y, gravity, jump_impulse)
-	
-func jump():
-	
-	if (jumpReleased): velocity.y = jump_impulse / 2
-	elif (jumpPressed): 
-		velocity.y = jump_impulse
-		jump_count+= 1
+	velocity.y = clamp(velocity.y, gravity, jump_ability.jump_impulse)

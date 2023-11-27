@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bjr35obqpvhxv"]
+[gd_scene load_steps=17 format=3 uid="uid://bjr35obqpvhxv"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_sidb1"]
 [ext_resource type="Texture2D" uid="uid://dp8ok7dge62v1" path="res://Assets/character_Material Base Color.png" id="2_wc5f7"]
 [ext_resource type="PackedScene" uid="uid://b833cnb81x1wj" path="res://Prefabs/playerLookCamera.tscn" id="3_emj7v"]
+[ext_resource type="PackedScene" uid="uid://1ltqbhjjpufe" path="res://Prefabs/Character Actions/jump_ability.tscn" id="4_2oqxb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vu25n"]
 resource_name = "Material"
@@ -579,7 +580,7 @@ bones/4/name = "spine.004"
 bones/4/parent = 3
 bones/4/rest = Transform3D(1, 2.13163e-14, 2.38419e-07, 9.42182e-08, 0.918604, -0.39518, -2.19012e-07, 0.39518, 0.918604, 5.29396e-23, 0.192579, 2.79397e-09)
 bones/4/enabled = true
-bones/4/position = Vector3(1.317e-09, 0.177606, -0.000427735)
+bones/4/position = Vector3(-1.27099e-09, 0.168053, -0.00070066)
 bones/4/rotation = Quaternion(0.201738, 1.16758e-07, 2.4049e-08, 0.97944)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "spine.005"
@@ -628,8 +629,8 @@ bones/11/name = "upper_arm.L"
 bones/11/parent = 10
 bones/11/rest = Transform3D(-0.243773, 0.249726, 0.93713, -0.413903, 0.847073, -0.333395, -0.877074, -0.469153, -0.103131, 0.00779154, 0.200791, -0.020385)
 bones/11/enabled = true
-bones/11/position = Vector3(0.0077933, 0.200804, -0.0441161)
-bones/11/rotation = Quaternion(-0.0853252, 0.743322, -0.298107, 0.592726)
+bones/11/position = Vector3(0.00779441, 0.200813, -0.0592574)
+bones/11/rotation = Quaternion(-0.104346, 0.744269, -0.31517, 0.57952)
 bones/11/scale = Vector3(1, 1, 1)
 bones/12/name = "forearm.L"
 bones/12/parent = 11
@@ -656,8 +657,8 @@ bones/15/name = "upper_arm.R"
 bones/15/parent = 14
 bones/15/rest = Transform3D(-0.243773, -0.249726, -0.93713, 0.413903, 0.847073, -0.333395, 0.877074, -0.469153, -0.103131, -0.00779154, 0.200791, -0.020385)
 bones/15/enabled = true
-bones/15/position = Vector3(-0.0077933, 0.200804, -0.0441161)
-bones/15/rotation = Quaternion(-0.0853252, -0.743322, 0.298107, 0.592726)
+bones/15/position = Vector3(-0.00779441, 0.200813, -0.0592574)
+bones/15/rotation = Quaternion(-0.104346, -0.744269, 0.31517, 0.57952)
 bones/15/scale = Vector3(1, 1, 1)
 bones/16/name = "forearm.R"
 bones/16/parent = 15
@@ -764,3 +765,5 @@ active = true
 parameters/BlendSpace1D/blend_position = -0.158215
 
 [node name="playerLookCamera" parent="." instance=ExtResource("3_emj7v")]
+
+[node name="jump_ability" parent="." instance=ExtResource("4_2oqxb")]
