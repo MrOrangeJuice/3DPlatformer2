@@ -24,6 +24,12 @@ var moving = false
 @onready var anim_tree = $AnimationTree
 @onready var jump_ability = $jump_ability
 
+@export_group("Ability Nodes")
+@export var primary: CharacterAbility
+@export var secondary: CharacterAbility
+@export var utility: CharacterAbility
+@export var special: CharacterAbility
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -49,9 +55,8 @@ func _process_Movement(delta):
 	if moving: apply_movement(input_vector, direction, delta)
 	else: apply_friction(delta)
 	apply_gravity(delta)
-	if (jumpReleased): jump_ability._activate_ability()
-	elif (jumpPressed): jump_ability._activate_ability()
-	#if (jumpPressed or jumpReleased) and jump_count < max_jumps: jump()
+	if (jumpReleased): jump_ability._activate_ability("jumpReleased")
+	elif (jumpPressed): jump_ability._activate_ability("jumpPressed")
 	move_and_slide()
 	
 func get_input_vector():
@@ -67,7 +72,8 @@ func get_direction(input_vector):
 func apply_movement(input_vector, direction, delta):
 	velocity.x = velocity.move_toward(direction * max_speed, acceleration * delta).x
 	velocity.z = velocity.move_toward(direction * max_speed, acceleration * delta).z
-	pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-input_vector.x, -input_vector.z), rot_speed * delta)
+	if (input_vector != Vector3.ZERO):
+		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-input_vector.x, -input_vector.z), rot_speed * delta)
 
 func apply_friction(delta):
 	if is_on_floor():
