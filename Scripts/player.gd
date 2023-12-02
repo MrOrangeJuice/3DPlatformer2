@@ -17,6 +17,7 @@ var snap_vector = Vector3.ZERO
 var jumpPressed = false
 var jumpReleased = false
 var moving = false
+var spinning = false
 
 #Node references
 @onready var pivot = $Pivot
@@ -46,12 +47,16 @@ func _process_Inputs():
 	if jump_ability != null:
 		jumpPressed = true if Input.is_action_just_pressed("jump") else false
 		jumpReleased = true if (Input.is_action_just_released("jump") and velocity.y > jump_ability.jump_impulse / 2) else false
+	if Input.is_action_just_pressed("primary_ability"): spinning = true
 	
 func _update_State():
 	if direction != Vector3.ZERO: moving = true
 	pass
 	
 func _process_Movement(delta):
+	if spinning:
+		primary._activate_ability()
+		spinning = false
 	if moving: apply_movement(input_vector, direction, delta)
 	else: apply_friction(delta)
 	apply_gravity(delta)
